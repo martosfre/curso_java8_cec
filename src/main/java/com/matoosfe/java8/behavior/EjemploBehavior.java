@@ -35,7 +35,7 @@ public class EjemploBehavior {
 			System.out.println(estudiante);
 		}
 
-		System.out.println("\n\nFiltrar utilizando Behavior Parametrization");
+		System.out.println("\n\nFiltrar utilizando Behavior Parameterization");
 		System.out.println("Imprimir directamente");
 		ControladorEstudiante.filtrar(estudiantes, new EdadNombreEstudiante()).forEach(System.out::println);
 		System.out.println("\nImprimir con un for each");
@@ -55,11 +55,29 @@ public class EjemploBehavior {
 		for (Estudiante estudiante : listaEstCuatro) {
 			System.out.println(estudiante);
 		}
-		
+
 		System.out.println("\nFiltrar utilizando Lambda");
-		List<Estudiante> listaEstCinco = ControladorEstudiante.filtrar(estudiantes, (Estudiante est) -> est.getEdadEst() < 18);
+		List<Estudiante> listaEstCinco = ControladorEstudiante.filtrar(estudiantes,
+				(Estudiante est) -> (est.getEdadEst() != null && est.getEdadEst() > 18));
 		listaEstCinco.forEach(System.out::println);
+
 		
+		ISuma iacumular = (a, b) -> a + b; //Es la implementación de la interfaz con lambda (sin declaración)
+		ISuma iacumularDos = new ISuma() { // Es la implementación de la interfaz con clase anónima
+			
+			@Override
+			public int sumar(int a, int b) {
+				return a + b;
+			}
+		};
+		
+		ISuma iacumularTres = (int a, int b) -> a + b; //Lambda con declaración
+		
+		List<Integer> numeros = Arrays.asList(4, 5, 6, 7, 8, 8);
+		System.out.println("Total:" + ControladorEstudiante.acumular(numeros, iacumular));
+		System.out.println("Total:" + ControladorEstudiante.acumular(numeros, iacumularDos));
+		
+		IMensaje emiMen = (mensaje) -> System.out.println(mensaje.toUpperCase());
 
 	}
 

@@ -65,4 +65,18 @@ public class ControladorEstudiante {
 		}
 		return estudiantesRet;
 	}
+
+	/**
+	 * Método para acumular los valores de una lista y sumales cinco
+	 * @param numeroes
+	 * @param suma
+	 * @return
+	 */
+	public static int acumular(List<Integer> numeroes, ISuma suma) {
+		int total = 0;
+		for (Integer i : numeroes) {
+			total += suma.sumar(5, i);
+		}
+		return total;
+	}
 }
