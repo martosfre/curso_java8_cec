@@ -11,7 +11,7 @@ import java.util.Date;
  * @author martosfre
  *
  */
-public class Estudiante {
+public class Estudiante implements Comparable<Estudiante> {
 
 	private Integer codEst;
 	private String nombreEst;
@@ -104,10 +104,54 @@ public class Estudiante {
 		this.fechaEst = fechaEst;
 	}
 
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apellidoEst == null) ? 0 : apellidoEst.hashCode());
+		result = prime * result + ((edadEst == null) ? 0 : edadEst.hashCode());
+		result = prime * result + ((nombreEst == null) ? 0 : nombreEst.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estudiante other = (Estudiante) obj;
+		if (apellidoEst == null) {
+			if (other.apellidoEst != null)
+				return false;
+		} else if (!apellidoEst.equals(other.apellidoEst))
+			return false;
+		if (edadEst == null) {
+			if (other.edadEst != null)
+				return false;
+		} else if (!edadEst.equals(other.edadEst))
+			return false;
+		if (nombreEst == null) {
+			if (other.nombreEst != null)
+				return false;
+		} else if (!nombreEst.equals(other.nombreEst))
+			return false;
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return "Estudiante [codEst=" + codEst + ", nombreEst=" + nombreEst + ", apellidoEst=" + apellidoEst
 				+ ", edadEst=" + edadEst + ", fechaEst=" + fechaEst + "]";
+	}
+
+	@Override
+	public int compareTo(Estudiante o) {
+		return getCodEst().compareTo(o.getCodEst());
 	}
 
 }
