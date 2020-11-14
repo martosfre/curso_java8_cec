@@ -1,13 +1,16 @@
 package com.matoosfe.java8.streams;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.matoosfe.java8.Estudiante;
 
@@ -69,7 +72,58 @@ public class EjemploMapa {
 			valores[1] = p.add(p.multiply(new BigDecimal(0.10))).setScale(2, RoundingMode.HALF_UP);
 			return valores;
 		}).forEach(x -> System.out.println("Pensión:" + x[0] + ", Pensión más interés:" + x[1]));
+
+		System.out.println("\n\nEscribir procesamiento a un archivo");
+		File archivoPro = new File("/Users/martosfre/Downloads/procesamiento.txt");
+		try (FileWriter escritorDos = new FileWriter(archivoPro)) {
+			escritorDos.write("Promedio:" + estudiantes.stream().map(Estudiante::getPension)
+					.mapToDouble(d -> Double.parseDouble(d.toString())).average().getAsDouble());
+			estudiantes.stream().map(Estudiante::getPension).map(p -> {
+				BigDecimal[] valores = new BigDecimal[2];
+				valores[0] = p;
+				valores[1] = p.add(p.multiply(new BigDecimal(0.10))).setScale(2, RoundingMode.HALF_UP);
+				return valores;
+			}).map(x -> {
+				try {
+					escritorDos.write("Pensión:" + x[0] + ", Pensión más interés:" + x[1]);
+				} catch (IOException e1) {
+					return "Falla";
+				}
+				return "Procesado";
+			}).count();
+
+		} catch (Exception e2) {
+			System.out.println("Error escribir archivo:" + e2.getMessage());
+		}
+
 		
+		
+//		
+//		
+//		Stream<Object> stream = estudiantes.stream().map(Estudiante::getPension).map(p -> {
+//			BigDecimal[] valores = new BigDecimal[2];
+//			valores[0] = p;
+//			valores[1] = p.add(p.multiply(new BigDecimal(0.10))).setScale(2, RoundingMode.HALF_UP);
+//			return valores;
+//		});
+//
+//		try (FileWriter escritor = new FileWriter(archivoPro)) {
+//			escritor.write("Promedio:" + estudiantes.stream().map(Estudiante::getPension)
+//					.mapToDouble(d -> Double.parseDouble(d.toString())).average().getAsDouble());
+//			stream.map(x -> {
+//				BigDecimal[] valores = (BigDecimal[]) x;
+//				String linea = "\nPensión:" + valores[0] + ", Pensión más interés:" + valores[1];
+//				try {
+//					escritor.write(linea);
+//				} catch (IOException e1) {
+//					return "Fallo";
+//				}
+//				return "Ingresado correctamente";
+//			}).count();
+//
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 
 	}
 }
