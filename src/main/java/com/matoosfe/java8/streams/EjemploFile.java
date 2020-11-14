@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -45,6 +47,22 @@ public class EjemploFile {
 
 		}
 
+		System.out.println("Filtrar el archivo y capturar los inválidos en otro lista");
+		try (Stream<String> streamFile = Files.lines(Paths.get(nombreArchivo))) {
+			Map<Boolean, List<String[]>> mapaProcesamiento = streamFile.parallel().map(linea -> linea.split(",")).filter(m -> {
+				try {
+					new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(m[0]);
+					return true;
+				} catch (ParseException e){
+					return false;
+				}
+			}).collect(Collectors.partitioningBy(EjemploFile::validarMonto));
+			System.out.println("Incorrectos:" + mapaProcesamiento.get(false));
+			System.out.println("Correctos:" + mapaProcesamiento.get(true));
+
+		} catch (Exception e) {
+
+		}
 	}
 
 	public static boolean validarLinea(String[] linea) {
