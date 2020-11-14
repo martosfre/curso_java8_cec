@@ -3,6 +3,7 @@
  */
 package com.matoosfe.java8;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -18,6 +19,7 @@ public class Estudiante implements Comparable<Estudiante> {
 	private String apellidoEst;
 	private Integer edadEst;
 	private Date fechaEst;
+	private BigDecimal pension;
 
 	/**
 	 * @param codEst
@@ -26,6 +28,15 @@ public class Estudiante implements Comparable<Estudiante> {
 	 * @param edadEst
 	 * @param fechaEst
 	 */
+	public Estudiante(Integer codEst, String nombreEst, String apellidoEst, Integer edadEst, Date fechaEst, BigDecimal pension ) {
+		this.codEst = codEst;
+		this.nombreEst = nombreEst;
+		this.apellidoEst = apellidoEst;
+		this.edadEst = edadEst;
+		this.fechaEst = fechaEst;
+		this.pension = pension;
+	}
+	
 	public Estudiante(Integer codEst, String nombreEst, String apellidoEst, Integer edadEst, Date fechaEst) {
 		this.codEst = codEst;
 		this.nombreEst = nombreEst;
@@ -103,9 +114,22 @@ public class Estudiante implements Comparable<Estudiante> {
 	public void setFechaEst(Date fechaEst) {
 		this.fechaEst = fechaEst;
 	}
+	
+	
+	/**
+	 * @return the pension
+	 */
+	public BigDecimal getPension() {
+		return pension;
+	}
 
-	
-	
+	/**
+	 * @param pension the pension to set
+	 */
+	public void setPension(BigDecimal pension) {
+		this.pension = pension;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
