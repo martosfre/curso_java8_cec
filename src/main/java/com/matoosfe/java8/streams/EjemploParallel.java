@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import com.matoosfe.java8.Estudiante;
 
 /**
- * 
+ * Clase para mostrar el uso de parallel en Streams
  * @author martosfre
  *
  */

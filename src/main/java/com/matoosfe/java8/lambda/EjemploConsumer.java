@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
+ * Class para mostrar la utilización de la Functional interface Consumer
+ * 
  * @author martosfre
  *
  */
@@ -28,7 +30,6 @@ public class EjemploConsumer {
 	}
 
 	public static void main(String[] args) {
-
 		List<String> archivos = Arrays.asList("trabajo.txt", "horizonte.jpg", "documento.rtf");
 		EjemploConsumer.ejecutar(archivos, s -> System.out.println(s.toUpperCase()));
 	}

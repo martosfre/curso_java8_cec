@@ -12,6 +12,7 @@ import com.matoosfe.java8.Estudiante;
 
 /**
  * 
+ *Clase para mostrar el uso de ordenamiento con Streams
  * @author martosfre
  *
  */

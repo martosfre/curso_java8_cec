@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 import com.matoosfe.java8.Estudiante;
 
 /**
+ * Clase para mostrar la utilización de la Functional Interface Predicate
+ * 
  * @author martosfre
  *
  */
@@ -18,6 +20,7 @@ public class EjemploPredicado {
 
 	/**
 	 * Método para filtrar elementos de una colección a través de un predicado
+	 * 
 	 * @param <T>
 	 * @param lista
 	 * @param pre
@@ -38,15 +41,14 @@ public class EjemploPredicado {
 		List<String> archivos = Arrays.asList("trabajo.txt", "horizonte.jpg", "documento.rtf");
 		Predicate<String> preTipTxt = (String s) -> s.endsWith(".txt");
 		EjemploPredicado.filtrar(archivos, preTipTxt).forEach(System.out::println);
-		
+
 		System.out.println("\n\nImprimir Estudiantes");
 		List<Estudiante> estudiantes = Arrays.asList(new Estudiante(1, "Marlon", "Bravo", 19, null),
 				new Estudiante(2, "Evelyn", "Naranjo", 12, null), new Estudiante(3, "Marlon", "Carrasco", 24, null),
 				new Estudiante(4, "Oscar", "Bravo", 19, null), new Estudiante(5, "Geovanny", "Artes", 26, null),
 				new Estudiante(6, "Marlon", "Vizuete", 19, null), new Estudiante(7, "Marco", "Tipán", 11, null));
-		
+
 		EjemploPredicado.filtrar(estudiantes, (est) -> est.getEdadEst() > 18).forEach(System.out::println);
-		
-		
+
 	}
 }
