@@ -56,6 +56,12 @@ public class EjemploFile {
 		} catch (Exception e) {
 
 		}
+		System.out.println("\n\nFlat Map");
+		try (Stream<String> streamFile = Files.lines(Paths.get(nombreArchivo))) {
+			streamFile.map(linea -> linea.split(",")).flatMap(linea -> Arrays.stream(linea)).limit(30).forEach(System.out::println);;
+		}catch(Exception e) {
+			
+		}
 
 		System.out.println("\n\nFiltrar el archivo y capturar los inválidos en otro lista");
 		try (Stream<String> streamFile = Files.lines(Paths.get(nombreArchivo))) {

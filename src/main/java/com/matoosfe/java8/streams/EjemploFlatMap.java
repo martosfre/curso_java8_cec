@@ -28,6 +28,10 @@ public class EjemploFlatMap {
 		System.out.println("Imprimir los nombres que terminen en o con flatMap");
 		Stream<String> nombresSt = Arrays.stream(nombres).flatMap(n -> Arrays.stream(n));
 		nombresSt.filter(n -> n.endsWith("o")).forEach(System.out::println);
+		
+		System.out.println("\n\nArreglo bidimensional convertido en un arreglo lineal");
+		System.out.println("Valores:" + nombres[0] + "," + nombres[1] + "," + nombres[2]);
+		Arrays.stream(nombres).flatMap(n -> Arrays.stream(n)).forEach(System.out::println);
 	}
 
 }
