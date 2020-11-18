@@ -73,6 +73,7 @@ public class EjemploOrdenamiento {
 		estudiantes.stream().distinct().sorted(comparatorEst).forEach(System.out::println);
 		
 		
+		
 	}
 
 }
